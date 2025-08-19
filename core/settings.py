@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-@7x*2o7-(u+9n9=#mp^$t=5ol*jq4!6&4z=0scumw!g-&f55by
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["iamsardordev.pythonanywhere.com"]
 
 
 # Application definition
@@ -76,10 +76,15 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'iamsardordev$default',   # PA MySQL database nomi
+        'USER': 'iamsardordev',         # PA username
+        'PASSWORD': '@$2004$@',     # PA database paroli
+        'HOST': 'iamsardordev.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
     }
 }
+
 
 
 # Password validation
