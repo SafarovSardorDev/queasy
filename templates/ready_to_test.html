@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Ready To Test{% endblock %}
+
+{% block content %}
+<div class="max-w-lg w-full mx-auto bg-white shadow-lg rounded-xl p-6 mt-8 text-center">
+    <!-- Title -->
+    <h1 class="text-2xl font-bold text-gray-800 mb-2">Are you ready Testing?</h1>
+    <p class="text-gray-600 mb-4">
+        <span class="font-semibold">Test title:</span> {{ test.title }}
+    </p>
+
+    <!-- Details -->
+    <div class="text-left space-y-3 mb-6">
+        <p class="text-gray-700">
+            <span class="font-semibold">Details:</span> There are <span class="font-medium">{{ test.question_set.count }}</span> questions.
+        </p>
+        <p class="text-gray-700">
+            You have total <span class="font-medium">{{ test.maximum_attemps }}</span> attempts.
+        </p>
+        <p class="text-gray-700">
+            The minimum passing score is <span class="font-medium">{{ test.pass_percentage }}%</span>.
+        </p>
+        <p class="text-gray-700">
+            Make sure this whole test time is inside of 
+            <span class="font-medium">{{ test.start_date|date:"M d, Y H:i" }}</span> 
+            and <span class="font-medium">{{ test.end_date|date:"M d, Y H:i" }}</span>.
+        </p>
+        <p class="text-gray-700">
+            Author: 
+            <a href="{% url 'profile' test.author.id %}" class="text-blue-500 hover:underline">
+                @{{ test.author.username }}
+            </a>
+        </p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-col sm:flex-row justify-center gap-3">
+        <a href="{% url 'test' test.id %}" 
+           class="px-5 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition w-full sm:w-auto text-center">
+            Start Test
+        </a>
+        <a href="{% url 'download_test_pdf' test.id %}" 
+           class="px-5 py-2 bg-indigo-500 text-white rounded-lg shadow hover:bg-indigo-600 transition w-full sm:w-auto text-center">
+            Download
+        </a>
+        <a href="{% url 'index' %}" 
+           class="px-5 py-2 bg-gray-300 text-gray-800 rounded-lg shadow hover:bg-gray-400 transition w-full sm:w-auto text-center">
+            Back
+        </a>
+    </div>
+</div>
+{% endblock %}

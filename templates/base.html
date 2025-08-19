@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}QUEASY{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-14">
+                <!-- Logo -->
+                <div class="flex-shrink-0 text-xl font-bold text-indigo-600">
+                    <a href="{% url 'index' %}">QUEASY</a>
+                </div>
+
+                <!-- Links -->
+                <div class="space-x-4">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'new_test' %}" class="text-gray-700 hover:text-indigo-600">Add Test</a>
+                        <a href="{% url 'profile' request.user.id %}" class="text-gray-700 hover:text-indigo-600">Profile</a>
+                        <form id="logout-form" action="{% url 'logout' %}" method="post" class="hidden">
+                            {% csrf_token %}
+                        </form>
+
+                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" 
+                        class="text-red-500 hover:text-red-600">
+                        Logout
+                        </a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="text-gray-700 hover:text-indigo-600">Login</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>  
+
+    <!-- Content -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 py-6">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer (optional) -->
+    <footer class="bg-white text-center py-4 border-t">
+        <p class="text-sm text-gray-500">© 2025 QUEASY. Make by imsafarov.</p>
+    </footer>
+
+</body>
+</html>
